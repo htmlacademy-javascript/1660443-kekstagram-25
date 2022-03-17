@@ -54,10 +54,11 @@ for (let i = 1; i <= ARRAY_NUMBER; i++) {
 
   PHOTO_DESCRIPTION.push({
     id: i,
-    url: `photo/${i}.jpg`,
+    url: `photos/${i}.jpg`,
     description: `Фотография ${i}`,
     likes: getRandomPositiveNumber(15, 200),
     comments: ArrayComments
   });
 }
 
+export {PHOTO_DESCRIPTION};
