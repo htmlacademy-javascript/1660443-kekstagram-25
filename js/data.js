@@ -60,5 +60,4 @@ for (let i = 1; i <= ARRAY_NUMBER; i++) {
     comments: ArrayComments
   });
 }
-
 export {PHOTO_DESCRIPTION};

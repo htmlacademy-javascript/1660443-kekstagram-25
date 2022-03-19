@@ -14,3 +14,5 @@ PHOTO_DESCRIPTION.forEach ((photos) => {
   const PHOTOS_ELEMENT = PHOTOS_TEMPLATE.cloneNode(true);
   PHOTOS_CONTAINER.appendChild(PHOTOS_ELEMENT);
 });
+
+export {PHOTOS_CONTAINER, PHOTOS_IMAGES};
