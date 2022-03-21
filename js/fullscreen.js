@@ -32,10 +32,8 @@ const openPhotoPreview = () => {
   document.addEventListener('keydown', onPreviewEscapeKeydown);
 };
 
-const removeEventListener = () => {
-  closePhotoPreview();
-  document.removeEventListener('keydown', onPreviewEscapeKeydown);
-};
+
+
 
 const addThumbnailClickHandler =  (thumbnail, photo) => {
   thumbnail.addEventListener ('click', () => {
@@ -62,18 +60,8 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
     COMMENT_LOAD.classList.add('hidden');
     COMMENT_LIST_COUNTER.classList.add('hidden');
     FULLSCREEN_CLOSE_BUTTON.addEventListener(('click'), () => {
-<<<<<<< HEAD
-      FULLSCREEN_CONTAINER.classList.add('hidden');
-      PAGE_BODY.classList.remove('modal-open');
-    });
-    document.addEventListener('keydown', (evt) => {
-      if (evt.keyCode === 27) {
-        FULLSCREEN_CONTAINER.classList.add('hidden');
-        PAGE_BODY.classList.remove('modal-open');
-      }
-=======
-      removeEventListener();
->>>>>>> 6ea165d (Правда или действие(часть 1))
+      closePhotoPreview ();
+      document.removeEventListener('keydown', onPreviewEscapeKeydown);
     });
   });
 };
@@ -81,5 +69,7 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
 for (let i = 0; i < THUMBNAILS.length; i++) {
   addThumbnailClickHandler(THUMBNAILS[i], PHOTOS[i]);
 }
+
+export {PAGE_BODY};
 
 

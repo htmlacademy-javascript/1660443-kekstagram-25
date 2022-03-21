@@ -23,4 +23,5 @@ const appendElement = (parent, child) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+
 export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey, appendElement};

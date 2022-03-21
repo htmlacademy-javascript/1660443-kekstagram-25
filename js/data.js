@@ -24,7 +24,7 @@ const NAMES = [
   'Тихон'
 ];
 
-const MIN_COMMENTS = 0;
+const MIN_COMMENTS = 0 ;
 const MAX_COMMENTS = 7;
 const ARRAY_NUMBER = 25;
 const UNIQUE_ID_NUMBERS = [];
