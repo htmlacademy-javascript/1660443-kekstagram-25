@@ -1,4 +1,5 @@
-import {PHOTO_DESCRIPTION} from './data.js';
+import {PHOTOS} from './data.js';
+import {makeElement, isEscapeKey, appendElement} from './util.js';
 
 const FULLSCREEN_CONTAINER = document.querySelector('.big-picture');
 const FULLSCREEN_PHOTO = FULLSCREEN_CONTAINER.querySelector('.big-picture__img img');
@@ -12,18 +13,33 @@ const COMMENT_LOAD = FULLSCREEN_CONTAINER.querySelector('.comments-loader');
 const PAGE_BODY = document.querySelector('body');
 const FULLSCREEN_CLOSE_BUTTON = FULLSCREEN_CONTAINER.querySelector('.big-picture__cancel');
 
-const makeElement = (tagName, className, text) => {
-  const ELEMENT = document.createElement(tagName);
-  ELEMENT.classList.add(className);
-  if (text) {
-    ELEMENT.textContent = text;
+const closePhotoPreview = () => {
+  FULLSCREEN_CONTAINER.classList.add('hidden');
+  PAGE_BODY.classList.remove('modal-open');
+};
+
+const onPreviewEscapeKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePhotoPreview();
+    document.removeEventListener('keydown', onPreviewEscapeKeydown);
   }
-  return ELEMENT;
+};
+
+const openPhotoPreview = () => {
+  FULLSCREEN_CONTAINER.classList.remove('hidden');
+  PAGE_BODY.classList.add('modal-open');
+  document.addEventListener('keydown', onPreviewEscapeKeydown);
+};
+
+const removeEventListener = () => {
+  closePhotoPreview();
+  document.removeEventListener('keydown', onPreviewEscapeKeydown);
 };
 
 const addThumbnailClickHandler =  (thumbnail, photo) => {
   thumbnail.addEventListener ('click', () => {
-    FULLSCREEN_CONTAINER.classList.remove('hidden');
+    openPhotoPreview();
     FULLSCREEN_PHOTO.src = photo.url;
     LIKES_NUMBER.textContent = photo.likes;
     COMMENTS_NUMBER.textContent = photo.comments.length;
@@ -31,21 +47,22 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
 
     photo.comments.forEach((comment) => {
       const COMMENT_LIST_ITEM = makeElement('li', 'social__comment');
-      COMMENT_LIST.appendChild(COMMENT_LIST_ITEM);
+      appendElement(COMMENT_LIST, COMMENT_LIST_ITEM);
       const COMMENT_AVATAR = makeElement('img', 'social__picture');
       COMMENT_AVATAR.style.width = '35px';
       COMMENT_AVATAR.style.heigh = '35px';
-      COMMENT_LIST_ITEM.appendChild(COMMENT_AVATAR);
+      appendElement(COMMENT_LIST_ITEM, COMMENT_AVATAR);
       COMMENT_AVATAR.src = comment.avatar;
       COMMENT_AVATAR.alt = comment.message;
       const COMMENT_CONTENT = makeElement('p', 'social__text', comment.message );
-      COMMENT_LIST_ITEM.appendChild(COMMENT_CONTENT);
+      appendElement(COMMENT_LIST_ITEM, COMMENT_CONTENT);
+
     });
     DESCRIPTION.textContent = photo.description;
     COMMENT_LOAD.classList.add('hidden');
     COMMENT_LIST_COUNTER.classList.add('hidden');
-    PAGE_BODY.classList.add('modal-open');
     FULLSCREEN_CLOSE_BUTTON.addEventListener(('click'), () => {
+<<<<<<< HEAD
       FULLSCREEN_CONTAINER.classList.add('hidden');
       PAGE_BODY.classList.remove('modal-open');
     });
@@ -54,12 +71,15 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
         FULLSCREEN_CONTAINER.classList.add('hidden');
         PAGE_BODY.classList.remove('modal-open');
       }
+=======
+      removeEventListener();
+>>>>>>> 6ea165d (Правда или действие(часть 1))
     });
   });
 };
 
 for (let i = 0; i < THUMBNAILS.length; i++) {
-  addThumbnailClickHandler(THUMBNAILS[i], PHOTO_DESCRIPTION[i]);
+  addThumbnailClickHandler(THUMBNAILS[i], PHOTOS[i]);
 }
 
 

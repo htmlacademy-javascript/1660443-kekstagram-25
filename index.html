@@ -15,7 +15,7 @@
     <!-- Фильтрация изображений от других пользователей -->
     <section class="img-filters  img-filters--inactive  container">
       <h2 class="img-filters__title  visually-hidden">Фильтр фотографий</h2>
-      <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
+      <form class="img-filters__form"  action="https://25.javascript.pages.academy" method="post" name = "filter" enctype="multipart/form-data" autocomplete="off">
         <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">По умолчанию</button>
         <button type=button class="img-filters__button" id="filter-random">Случайные</button>
         <button type=button class="img-filters__button" id="filter-discussed">Обсуждаемые</button>
@@ -30,7 +30,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" action="https://25.javascript.pages.academy" method="post" name = "img-upload" enctype="multipart/form-data" autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -114,9 +114,11 @@
                 </fieldset>
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
-                <fieldset class="img-upload__text text">
+                  fieldset class="img-upload__text text">
+                  <label class="text__upload-label"
                   <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength = "140"></textarea>
+                  data-pristine-maxlength-message="Максимальная длина 140 символов">
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
@@ -166,11 +168,11 @@
           <button type="button" class="social__comments-loader  comments-loader">Загрузить еще</button>
 
           <!-- Форма для отправки комментария -->
-          <div class="social__footer">
+          <form class="social__footer" action="https://25.javascript.pages.academy" method="post" enctype="multipart/form-data" autocomplete="off" >
             <img class="social__picture" src="img/avatar-6.svg" alt="Аватар комментатора фотографии" width="35" height="35">
-            <input type="text" class="social__footer-text" placeholder="Ваш комментарий...">
+            <input type="text" class="social__footer-text" name = "comment" placeholder="Ваш комментарий..." maxlength = "140">
             <button type="button" class="social__footer-btn" name="button">Отправить</button>
-          </div>
+          <form/>
         </div>
 
         <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
@@ -229,6 +231,7 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
+  <script src="pristine/pristine.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 </html>
