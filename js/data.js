@@ -38,6 +38,7 @@ for (let i = 1; i<=(MAX_COMMENTS*ARRAY_NUMBER); i++ ) {
   if (uniqueNumber !== UNIQUE_ID_NUMBERS[i]) {
     UNIQUE_ID_NUMBERS.push (uniqueNumber);
   }
+}
 
 const createComments = () => ({
   id: getRandomArrayElement(UNIQUE_ID_NUMBERS),
