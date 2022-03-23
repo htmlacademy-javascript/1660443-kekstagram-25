@@ -32,9 +32,6 @@ const openPhotoPreview = () => {
   document.addEventListener('keydown', onPreviewEscapeKeydown);
 };
 
-
-
-
 const addThumbnailClickHandler =  (thumbnail, photo) => {
   thumbnail.addEventListener ('click', () => {
     openPhotoPreview();

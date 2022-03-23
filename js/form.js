@@ -56,7 +56,7 @@ FORM_UPLOAD.addEventListener('submit', (evt) => {
 });
 
 const GetHashtagArray = () => {
-  const HASHTAG_ELEMENTS = HASHTAG_INPUT.value.toLowerCase().split(' ').filter(hashtag => hashtag !== '');
+  const HASHTAG_ELEMENTS = HASHTAG_INPUT.value.toLowerCase().split(' ').filter((hashtag) => hashtag !== '');
   return HASHTAG_ELEMENTS;
 };
 
@@ -64,6 +64,8 @@ const checkHashtagNumber = () => {
   GetHashtagArray();
   return GetHashtagArray().length <= MAX_COMMENTS;
 };
+pristine.addValidator(HASHTAG_INPUT, checkHashtagNumber, 'Вы можете добавить не более 5 хэштегов');
+
 
 const checkHashtagSpelling = () => GetHashtagArray().every((element) => (element.match(RE)));
 
