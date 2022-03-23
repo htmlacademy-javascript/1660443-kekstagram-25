@@ -24,10 +24,10 @@ const NAMES = [
   'Тихон'
 ];
 
-const MIN_COMMENTS = 1;
+const MIN_COMMENTS = 0 ;
 const MAX_COMMENTS = 7;
 const ARRAY_NUMBER = 25;
-const UNIQUE_ID_NUMBER = [];
+const UNIQUE_ID_NUMBERS = [];
 const MIN_AVATAR_NUMBER = 1;
 const MAX_AVATAR_NUMBER = 6;
 const MIN_RANDOM_ID = 1;
@@ -35,24 +35,24 @@ const MAX_RANDOM_ID = 1000;
 
 for (let i = 1; i<=(MAX_COMMENTS*ARRAY_NUMBER); i++ ) {
   const uniqueNumber = getRandomPositiveNumber (MIN_RANDOM_ID, MAX_RANDOM_ID);
-  if (uniqueNumber !== UNIQUE_ID_NUMBER[i]) {
-    UNIQUE_ID_NUMBER.push (uniqueNumber);
+  if (uniqueNumber !== UNIQUE_ID_NUMBERS[i]) {
+    UNIQUE_ID_NUMBERS.push (uniqueNumber);
   }
 }
 
 const createComments = () => ({
-  id: getRandomArrayElement(UNIQUE_ID_NUMBER),
+  id: getRandomArrayElement(UNIQUE_ID_NUMBERS),
   avatar: `img/avatar-${getRandomPositiveNumber(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
-const PHOTO_DESCRIPTION = [];
+const PHOTOS= [];
 
 for (let i = 1; i <= ARRAY_NUMBER; i++) {
   const ArrayComments = Array.from({length:(getRandomPositiveNumber(MIN_COMMENTS, MAX_COMMENTS)),}, createComments);
 
-  PHOTO_DESCRIPTION.push({
+  PHOTOS.push({
     id: i,
     url: `photos/${i}.jpg`,
     description: `Фотография ${i}`,
@@ -60,4 +60,4 @@ for (let i = 1; i <= ARRAY_NUMBER; i++) {
     comments: ArrayComments
   });
 }
-export {PHOTO_DESCRIPTION};
+export {PHOTOS};

@@ -1,6 +1,3 @@
-const checkStringLength = (string, stringMaxLength) => string.length <= stringMaxLength;
-checkStringLength(3, 140);
-
 const getRandomPositiveNumber = (a, b) => {
   const minNumber = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const maxNumber = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -11,4 +8,20 @@ const MIN_RANDOM_ELEMENT = 0;
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveNumber(MIN_RANDOM_ELEMENT, elements.length - 1)];
 
-export {getRandomPositiveNumber, getRandomArrayElement};
+const makeElement = (tagName, className, text) => {
+  const ELEMENT = document.createElement(tagName);
+  ELEMENT.classList.add(className);
+  if (text) {
+    ELEMENT.textContent = text;
+  }
+  return ELEMENT;
+};
+
+const appendElement = (parent, child) => {
+  parent.appendChild(child);
+};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+
+export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey, appendElement};
