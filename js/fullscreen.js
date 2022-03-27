@@ -33,11 +33,6 @@ const openPhotoPreview = () => {
   document.addEventListener('keydown', onPreviewEscapeKeydown);
 };
 
-const removeEventListener = () => {
-  closePhotoPreview();
-  document.removeEventListener('keydown', onPreviewEscapeKeydown);
-};
-
 const addThumbnailClickHandler =  (thumbnail, photo) => {
   thumbnail.addEventListener ('click', () => {
     openPhotoPreview();
@@ -48,28 +43,6 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
     COMMENT_LIST.innerHTML = '';
 
 
-<<<<<<< HEAD
-    });
-    DESCRIPTION.textContent = photo.description;
-    COMMENT_LOAD.classList.add('hidden');
-    COMMENT_LIST_COUNTER.classList.add('hidden');
-    FULLSCREEN_CLOSE_BUTTON.addEventListener(('click'), () => {
-<<<<<<< HEAD
-      FULLSCREEN_CONTAINER.classList.add('hidden');
-      PAGE_BODY.classList.remove('modal-open');
-    });
-    document.addEventListener('keydown', (evt) => {
-      if (evt.keyCode === 27) {
-        FULLSCREEN_CONTAINER.classList.add('hidden');
-        PAGE_BODY.classList.remove('modal-open');
-      }
-=======
-      removeEventListener();
->>>>>>> 6ea165d (Правда или действие(часть 1))
-    });
-  });
-};
-=======
     const addFragment  = (comments)  => {
       const fragment = document.createDocumentFragment();
 
@@ -120,10 +93,11 @@ FULLSCREEN_CLOSE_BUTTON.addEventListener ('click', () => {
   closePhotoPreview ();
   document.removeEventListener('keydown', onPreviewEscapeKeydown);
 });
->>>>>>> b5d7152 (Правда или действие (часть 2))
 
 for (let i = 0; i < THUMBNAILS.length; i++) {
   addThumbnailClickHandler(THUMBNAILS[i], PHOTOS[i]);
 }
+
+export {PAGE_BODY};
 
 
