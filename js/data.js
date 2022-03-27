@@ -24,8 +24,8 @@ const NAMES = [
   'Тихон'
 ];
 
-const MIN_COMMENTS = 0;
-const MAX_COMMENTS = 7;
+const MIN_COMMENTS = 0 ;
+const MAX_COMMENTS = 15;
 const ARRAY_NUMBER = 25;
 const UNIQUE_ID_NUMBERS = [];
 const MIN_AVATAR_NUMBER = 1;
@@ -47,7 +47,7 @@ const createComments = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const PHOTOS= [];
+const PHOTOS = [];
 
 for (let i = 1; i <= ARRAY_NUMBER; i++) {
   const ArrayComments = Array.from({length:(getRandomPositiveNumber(MIN_COMMENTS, MAX_COMMENTS)),}, createComments);
@@ -60,4 +60,4 @@ for (let i = 1; i <= ARRAY_NUMBER; i++) {
     comments: ArrayComments
   });
 }
-export {PHOTOS};
+export {PHOTOS };

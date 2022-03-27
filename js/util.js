@@ -17,10 +17,7 @@ const makeElement = (tagName, className, text) => {
   return ELEMENT;
 };
 
-const appendElement = (parent, child) => {
-  parent.appendChild(child);
-};
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey, appendElement};
+
+export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey};
