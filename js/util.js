@@ -9,12 +9,12 @@ const MIN_RANDOM_ELEMENT = 0;
 const getRandomArrayElement = (elements) => elements[getRandomPositiveNumber(MIN_RANDOM_ELEMENT, elements.length - 1)];
 
 const makeElement = (tagName, className, text) => {
-  const ELEMENT = document.createElement(tagName);
-  ELEMENT.classList.add(className);
+  const element = document.createElement(tagName);
+  element.classList.add(className);
   if (text) {
-    ELEMENT.textContent = text;
+    element.textContent = text;
   }
-  return ELEMENT;
+  return element;
 };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
