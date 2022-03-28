@@ -9,19 +9,15 @@ const MIN_RANDOM_ELEMENT = 0;
 const getRandomArrayElement = (elements) => elements[getRandomPositiveNumber(MIN_RANDOM_ELEMENT, elements.length - 1)];
 
 const makeElement = (tagName, className, text) => {
-  const ELEMENT = document.createElement(tagName);
-  ELEMENT.classList.add(className);
+  const element = document.createElement(tagName);
+  element.classList.add(className);
   if (text) {
-    ELEMENT.textContent = text;
+    element.textContent = text;
   }
-  return ELEMENT;
-};
-
-const appendElement = (parent, child) => {
-  parent.appendChild(child);
+  return element;
 };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 
-export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey, appendElement};
+export {getRandomPositiveNumber, getRandomArrayElement, makeElement, isEscapeKey};
