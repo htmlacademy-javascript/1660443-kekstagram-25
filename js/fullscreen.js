@@ -1,9 +1,12 @@
-import {PHOTOS} from './data.js';
 import {makeElement, isEscapeKey} from './util.js';
+import {photos} from './data.js';
+import './api.js';
 
 const fullscreenContainer = document.querySelector('.big-picture');
 const fullscreenPhoto = fullscreenContainer.querySelector('.big-picture__img img');
 const thumbnails = document.querySelectorAll('.picture');
+console.log(thumbnails)
+//thumbnails консоль не находит!
 const likesNumber = fullscreenContainer.querySelector('.likes-count');
 const commentsNumber = fullscreenContainer.querySelector('.comments-count');
 const description = fullscreenContainer.querySelector('.social__caption');
@@ -36,7 +39,7 @@ const openPhotoPreview = () => {
 const addThumbnailClickHandler =  (thumbnail, photo) => {
   thumbnail.addEventListener ('click', () => {
     openPhotoPreview();
-    fullscreenPhoto .src = photo.url;
+    fullscreenPhoto.src = photo.url;
     likesNumber.textContent = photo.likes;
     commentsNumber.textContent = String(photo.comments.length);
     description.textContent = photo.description;
@@ -97,9 +100,8 @@ fullscreenCloseButton.addEventListener ('click', () => {
 });
 
 for (let i = 0; i < thumbnails.length; i++) {
-  addThumbnailClickHandler(thumbnails[i], PHOTOS[i]);
+  addThumbnailClickHandler(thumbnails[i], photos[i]);
 }
-
 export {pageBody};
 
 
