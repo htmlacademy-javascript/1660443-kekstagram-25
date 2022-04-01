@@ -1,6 +1,12 @@
-import './util.js';
 import './api.js';
-import './data.js';
-//import './fullscreen.js';
+import {createGallery} from './data.js';
+import {getData} from './api.js';
 import './form.js';
 import './photo-effects.js';
+
+getData((pictures) => {
+  createGallery(pictures);
+});
+
+
+

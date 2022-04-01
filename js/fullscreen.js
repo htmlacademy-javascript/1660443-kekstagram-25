@@ -1,18 +1,14 @@
-import {makeElement, isEscapeKey} from './util.js';
-import {photos} from './data.js';
-import './api.js';
+import {isEscapeKey, makeElement} from './util.js';
+
 
 const fullscreenContainer = document.querySelector('.big-picture');
+const pageBody = document.querySelector('body');
 const fullscreenPhoto = fullscreenContainer.querySelector('.big-picture__img img');
-const thumbnails = document.querySelectorAll('.picture');
-console.log(thumbnails)
-//thumbnails консоль не находит!
 const likesNumber = fullscreenContainer.querySelector('.likes-count');
 const commentsNumber = fullscreenContainer.querySelector('.comments-count');
 const description = fullscreenContainer.querySelector('.social__caption');
 const commentsContainer= fullscreenContainer.querySelector('.social__comments');
 const commentsCounter = fullscreenContainer.querySelector('.social__comment-count');
-const pageBody = document.querySelector('body');
 const fullscreenCloseButton = fullscreenContainer.querySelector('.big-picture__cancel');
 const loadCommentsButton = fullscreenContainer.querySelector('.comments-loader');
 const MAX_COMMENTS_NUMBER = 5;
@@ -36,15 +32,15 @@ const openPhotoPreview = () => {
   document.addEventListener('keydown', onPreviewEscapeKeydown);
 };
 
-const addThumbnailClickHandler =  (thumbnail, photo) => {
-  thumbnail.addEventListener ('click', () => {
+const addThumbnailClickHandler =  ((thumbnails, photo) => {
+
+  thumbnails.addEventListener ('click', () => {
     openPhotoPreview();
     fullscreenPhoto.src = photo.url;
     likesNumber.textContent = photo.likes;
     commentsNumber.textContent = String(photo.comments.length);
     description.textContent = photo.description;
     commentsContainer.innerHTML = '';
-
 
     const addFragment  = (comments)  => {
       const fragment = document.createDocumentFragment();
@@ -92,16 +88,14 @@ const addThumbnailClickHandler =  (thumbnail, photo) => {
       });
     };
     addComments(photo.comments, commentsContainer);
-  });};
+  });});
 
 fullscreenCloseButton.addEventListener ('click', () => {
   closePhotoPreview ();
   document.removeEventListener('keydown', onPreviewEscapeKeydown);
 });
 
-for (let i = 0; i < thumbnails.length; i++) {
-  addThumbnailClickHandler(thumbnails[i], photos[i]);
-}
-export {pageBody};
+
+export {addThumbnailClickHandler, pageBody};
 
 

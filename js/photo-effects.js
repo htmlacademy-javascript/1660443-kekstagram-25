@@ -8,6 +8,7 @@ const valueElement = document.querySelector('.effect-level__value');
 const radioButtons = document.querySelectorAll ('.effects__radio');
 let scaleValue = parseFloat(scaleInput.value);
 const STEP = '25%';
+const MAX_SCALE ='100';
 
 zoomOutButton.addEventListener('click', () => {
   if (scaleValue >= 50 && scaleValue <= 100) {
@@ -134,5 +135,4 @@ radioButtons.forEach ((button) => {
     }
   });
 });
-
-
+export {imagePreview, scaleInput, MAX_SCALE};
