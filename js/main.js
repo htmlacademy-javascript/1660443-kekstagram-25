@@ -1,32 +1,26 @@
 import './api.js';
-import {createGallery} from './data.js';
+import {createGalleryElement, createDefaultGallery} from './data.js';
 import {getData} from './api.js';
 import './form.js';
 import './photo-effects.js';
-import {defaultButton, removeClass, removeElement} from './filter.js';
-const RERENDER_DELAY = 5000;
+const RERENDER_DELAY = 500;
+//import {showRandomPictures, picturesShown, showDefaultPictures} from './data.js';
+//import {addThumbnailClickHandler} from './fullscreen.js';
 
 getData((pictures) => {
-  //createGallery(pictures);
-
-  defaultButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    removeElement();
-    removeClass();
-    defaultButton.classList.add('img-filters__button--active');
-    createGallery(pictures);
-  });
-
+  //createGallery(pictqqq
+  ures);
+  createDefaultGallery();
   const debounce = (callback, timeoutDelay) => {
     let timeoutId;
     return (...rest) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-    };
-  };
+    };}
 
-  //Не поняла debouce совсем(
-  //Это правильно?
-  debounce((createGallery(pictures), RERENDER_DELAY));
-});
+  createDefaultGallery(debounce(()=>createGalleryElement(pictures), RERENDER_DELAY ))
+
+
+
+})
 
