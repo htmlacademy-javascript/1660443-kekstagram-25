@@ -1,4 +1,5 @@
 import './api.js';
+<<<<<<< HEAD
 import {createGalleryElement, createDefaultGallery} from './data.js';
 import {getData} from './api.js';
 import './form.js';
@@ -23,4 +24,18 @@ getData((pictures) => {
 
 
 })
+=======
+import {createGallery, createGalleryElement} from './data.js';
+import {getData} from './api.js';
+import './form.js';
+import './photo-effects.js';
+import {buttons} from './filter.js';
+const RERENDER_DELAY = 5000;
+
+getData((pictures) => {
+  createGallery(pictures);
+})
+
+
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
 

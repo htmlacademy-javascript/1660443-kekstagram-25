@@ -1,5 +1,9 @@
 import {addThumbnailClickHandler} from './fullscreen.js';
+<<<<<<< HEAD
 import {popularButton, randomButton, defaultButton,removeClass, removeElement} from './filter.js';
+=======
+import {defaultButton, popularButton, randomButton, removeClass, removeElement} from './filter.js';
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
 import {getRandomArrayElement} from './util.js';
 const galleryFragment = document.createDocumentFragment();
 const photoContainer = document.querySelector ('.pictures');
@@ -7,6 +11,14 @@ const photoTemplateFragment = document.querySelector('#picture').content;
 const photoTemplate = photoTemplateFragment.querySelector('.picture');
 const MAX_RANDOM_PHOTOS = 10;
 let picturesShown = [];
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
 const createGalleryElement = (pictures) => {
   pictures.forEach((photo) => {
@@ -19,6 +31,7 @@ const createGalleryElement = (pictures) => {
   });};
 
 
+<<<<<<< HEAD
  /* const showDefaultPictures = (pictures, cb) => {
     defaultButton.addEventListener('click', (evt) => {
       evt.preventDefault();
@@ -76,11 +89,18 @@ const showRandomPictures = (pictures, cb) => {
 
 
   const createDefaultGallery = (pictures, cb) => {
+=======
+  for (let i = 0; i < thumbnails.length; i++) {
+    addThumbnailClickHandler(thumbnails[i], pictures[i]);
+  }
+
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
   defaultButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     removeElement();
     removeClass();
     defaultButton.classList.add('img-filters__button--active');
+<<<<<<< HEAD
     createGalleryElement(pictures);
     //cb();
     const thumbnailsDefault = document.querySelectorAll('.picture');
@@ -100,21 +120,47 @@ const showRandomPictures = (pictures, cb) => {
 
 
   /*popularButton.addEventListener('click', (evt) => {
+=======
+    //так работает полноэкранный режим
+    //createGalleryElement(pictures),
+
+    // а так debounce
+    const createDefaultGallery = debounce(() => createGalleryElement(pictures), 500);
+
+    createDefaultGallery(pictures);
+    const  thumbnailsDefault = document.querySelectorAll('.picture');
+    for (let i = 0; i < thumbnailsDefault.length; i++) {
+      addThumbnailClickHandler(thumbnailsDefault[i], pictures[i]);
+    }});
+
+  popularButton.addEventListener('click', (evt) => {
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
     evt.preventDefault();
     removeElement();
     removeClass();
     popularButton.classList.add('img-filters__button--active');
     const picturesCopy = pictures.slice();
     const picturesSorted = picturesCopy.sort((a , b) => b.comments.length - a.comments.length);
+<<<<<<< HEAD
     //createGalleryElement(picturesSorted);
 
 
 
     //cb(picturesSorted);
+=======
+
+    //так работает полноэкранный режим
+    //createGalleryElement(picturesSorted),
+    // а так debounce
+    const createPopularGallery = debounce(() => createGalleryElement(picturesSorted), 500);
+
+    createPopularGallery();
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
     const thumbnailsSorted = document.querySelectorAll('.picture');
 
     for (let i = 0; i < thumbnailsSorted.length; i++) {
       addThumbnailClickHandler(thumbnailsSorted[i], picturesSorted[i]);
+
     }
   });
 
@@ -136,16 +182,30 @@ const showRandomPictures = (pictures, cb) => {
       });
     }
     const picturesShown = Array.from(uniqueRandomPictures).slice(0, MAX_RANDOM_PHOTOS);
+<<<<<<< HEAD
     //createGalleryElement(picturesShown);
     cb(picturesShown);
+=======
+    //так работает полноэкранный режим
+    //createGalleryElement(picturesShown),
+
+    // а так debounce
+    const createRandomGallery = debounce(() => createGalleryElement(picturesShown), 500);
+
+    createRandomGallery();
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
     const thumbnailsRandom = document.querySelectorAll('.picture');
 
     for (let i = 0; i < thumbnailsRandom.length; i++) {
       addThumbnailClickHandler(thumbnailsRandom[i], picturesShown[i]);
     }
-  });
+  });};
 
+<<<<<<< HEAD
 */
 export { createGalleryElement, createDefaultGallery, picturesShown, removeElement, removeClass};
+=======
+export {createGallery, createGalleryElement, removeElement, removeClass};
+>>>>>>> 5e0b874 (Перламутровые пуговицы)
 
 
