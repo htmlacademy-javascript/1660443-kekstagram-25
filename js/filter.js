@@ -9,14 +9,11 @@ buttonActive.style.backgroundColor = '#ffffff';
 
 pictureFilter.classList.remove('img-filters--inactive');
 
-const removeElement = () => {
+const clearPreviousPictures = () => {
   const allPictures = document.querySelectorAll ('.picture');
   allPictures.forEach((unit) => {
     unit.remove();
   });
-};
-
-const removeClass = () => {
   buttons.forEach((button) => {
     button.classList.remove('img-filters__button--active');
     button.style.color = null;
@@ -24,5 +21,5 @@ const removeClass = () => {
   });
 };
 
-export {popularButton, randomButton, defaultButton, removeElement, removeClass, buttons};
+export {popularButton, randomButton, defaultButton, clearPreviousPictures};
 
