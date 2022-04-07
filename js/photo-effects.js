@@ -129,7 +129,6 @@ radioButtons.forEach ((button) => {
         sliderElement.noUiSlider.on('update', () => {
           const filterValue= sliderElement.noUiSlider.get(true);
           valueElement.value = filterValue;
-          console.log(filterValue)
           imagePreview.style.filter = `${EFFECTS[i].filter}(${filterValue}${EFFECTS[i].units})`;
         });
       }
