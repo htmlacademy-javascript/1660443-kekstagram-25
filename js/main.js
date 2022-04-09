@@ -1,5 +1,4 @@
-import './api.js';
-import {createGalleryElement, createGallery} from './data.js';
+import {createStartGallery} from './data.js';
 import {getData} from './api.js';
 import './form.js';
 import './photo-effects.js';
@@ -8,8 +7,7 @@ import './user-photo.js';
 let uploadedPhotos;
 
 getData((pictures) => {
-  createGalleryElement(pictures);
-  createGallery(pictures);
+  createStartGallery(pictures);
   uploadedPhotos = pictures;
 });
 
