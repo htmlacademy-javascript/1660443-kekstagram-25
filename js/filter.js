@@ -1,17 +1,19 @@
 const pictureFilter = document.querySelector ('.img-filters');
 const popularButton = document.querySelector('#filter-discussed');
 const randomButton = document.querySelector('#filter-random');
-const defaultButton = document.querySelector('#filter-default');
+const standardButton = document.querySelector('#filter-default');
 const buttons = document.querySelectorAll('.img-filters__button');
-const buttonActive = document.querySelector('.img-filters__button--active');
-buttonActive.style.color = '#ff4e4e';
-buttonActive.style.backgroundColor = '#ffffff';
+const activeButton = document.querySelector('.img-filters__button--active');
+activeButton.style.color = '#ff4e4e';
+activeButton.style.backgroundColor = '#ffffff';
 
-pictureFilter.classList.remove('img-filters--inactive');
+window.addEventListener('load', () => {
+  pictureFilter.classList.remove('img-filters--inactive');
+});
 
-const clearPreviousPictures = () => {
-  const allPictures = document.querySelectorAll ('.picture');
-  allPictures.forEach((unit) => {
+const clearPicturesList = () => {
+  const picturesList = document.querySelectorAll ('.picture');
+  picturesList.forEach((unit) => {
     unit.remove();
   });
   buttons.forEach((button) => {
@@ -21,5 +23,5 @@ const clearPreviousPictures = () => {
   });
 };
 
-export {popularButton, randomButton, defaultButton, clearPreviousPictures};
+export {popularButton, randomButton, standardButton, clearPicturesList};
 

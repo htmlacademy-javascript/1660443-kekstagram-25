@@ -1,20 +1,19 @@
 import {isEscapeKey, makeElement} from './util.js';
 
-
-const fullscreenContainer = document.querySelector('.big-picture');
-const pageBody = document.querySelector('body');
-const fullscreenPhoto = fullscreenContainer.querySelector('.big-picture__img img');
-const likesNumber = fullscreenContainer.querySelector('.likes-count');
-const commentsNumber = fullscreenContainer.querySelector('.comments-count');
-const description = fullscreenContainer.querySelector('.social__caption');
-const commentsContainer= fullscreenContainer.querySelector('.social__comments');
-const commentsCounter = fullscreenContainer.querySelector('.social__comment-count');
-const fullscreenCloseButton = fullscreenContainer.querySelector('.big-picture__cancel');
-const loadCommentsButton = fullscreenContainer.querySelector('.comments-loader');
 const MAX_COMMENTS_NUMBER = 5;
+const previewContainer = document.querySelector('.big-picture');
+const pageBody = document.querySelector('body');
+const previewPhoto = previewContainer.querySelector('.big-picture__img img');
+const likesNumber = previewContainer.querySelector('.likes-count');
+const commentsNumber = previewContainer.querySelector('.comments-count');
+const commentsDescription = previewContainer.querySelector('.social__caption');
+const commentsContainerElement= previewContainer.querySelector('.social__comments');
+const commentsCounter = previewContainer.querySelector('.social__comment-count');
+const previewCloseButton = previewContainer.querySelector('.big-picture__cancel');
+const loadCommentsButton = previewContainer.querySelector('.comments-loader');
 
 const closePhotoPreview = () => {
-  fullscreenContainer.classList.add('hidden');
+  previewContainer.classList.add('hidden');
   pageBody.classList.remove('modal-open');
   loadCommentsButton.classList.remove('hidden');
 };
@@ -27,38 +26,38 @@ const onPreviewEscapeKeydown = (evt) => {
 };
 
 const openPhotoPreview = () => {
-  fullscreenContainer.classList.remove('hidden');
+  previewContainer.classList.remove('hidden');
   pageBody.classList.add('modal-open');
   document.addEventListener('keydown', onPreviewEscapeKeydown);
 };
 
-const addThumbnailClickHandler =  ((thumbnails, photo) => {
+const onThumbnailClick =  ((thumbnails, photo) => {
 
   thumbnails.addEventListener ('click', () => {
     openPhotoPreview();
-    fullscreenPhoto.src = photo.url;
+    previewPhoto.src = photo.url;
     likesNumber.textContent = photo.likes;
     commentsNumber.textContent = String(photo.comments.length);
-    description.textContent = photo.description;
-    commentsContainer.innerHTML = '';
+    commentsDescription.textContent = photo.description;
+    commentsContainerElement.innerHTML = '';
 
-    const addFragment  = (comments)  => {
-      const fragment = document.createDocumentFragment();
+    const addCommentsFragment  = (comments)  => {
+      const commentsFragment = document.createDocumentFragment();
 
       comments.forEach((element) => {
-        const commentsItem = makeElement('li', 'social__comment');
-        commentsContainer.appendChild(commentsItem);
+        const commentsElement = makeElement('li', 'social__comment');
+        commentsContainerElement.appendChild(commentsElement);
         const commentsAvatar = makeElement('img', 'social__picture');
         commentsAvatar.style.width = '35px';
         commentsAvatar.style.height = '35px';
-        commentsItem.appendChild(commentsAvatar);
+        commentsElement.appendChild(commentsAvatar);
         commentsAvatar.src = element.avatar;
         commentsAvatar.alt = element.name;
-        const COMMENT_CONTENT = makeElement('p', 'social__text', element.message );
-        commentsItem.appendChild(COMMENT_CONTENT);
-        fragment.appendChild(commentsItem);
+        const commentsContent = makeElement('p', 'social__text', element.message );
+        commentsElement.appendChild(commentsContent);
+        commentsFragment.appendChild(commentsElement);
       });
-      return fragment;
+      return commentsFragment;
     };
 
     const addComments = (array, container ) => {
@@ -66,7 +65,7 @@ const addThumbnailClickHandler =  ((thumbnails, photo) => {
       const commentsList = array.slice();
       const commentsPortion = commentsList.splice(0, MAX_COMMENTS_NUMBER);
       let commentsLength = commentsPortion.length;
-      container.appendChild(addFragment(commentsPortion));
+      container.appendChild(addCommentsFragment(commentsPortion));
       commentsCounter.textContent = `${commentsLength} из ${array.length}`;
 
       if (commentsLength === array.length) {
@@ -77,9 +76,9 @@ const addThumbnailClickHandler =  ((thumbnails, photo) => {
         loadCommentsButton.classList.remove('hidden');
         evt.preventDefault();
         const additionalCommentsPortion = commentsList.splice(0, MAX_COMMENTS_NUMBER);
-        const addedComments = additionalCommentsPortion.length;
-        commentsContainer.appendChild(addFragment(additionalCommentsPortion ));
-        commentsLength = commentsLength + addedComments;
+        const additionalCommentsLength = additionalCommentsPortion.length;
+        commentsContainerElement.appendChild(addCommentsFragment(additionalCommentsPortion ));
+        commentsLength = commentsLength + additionalCommentsLength;
         commentsCounter.textContent = `${commentsLength} из ${array.length}`;
 
         if (commentsList.length === 0) {
@@ -87,15 +86,14 @@ const addThumbnailClickHandler =  ((thumbnails, photo) => {
         }
       });
     };
-    addComments(photo.comments, commentsContainer);
+    addComments(photo.comments, commentsContainerElement);
   });});
 
-fullscreenCloseButton.addEventListener ('click', () => {
+previewCloseButton.addEventListener ('click', () => {
   closePhotoPreview ();
   document.removeEventListener('keydown', onPreviewEscapeKeydown);
 });
 
-
-export {addThumbnailClickHandler, pageBody};
+export {onThumbnailClick, pageBody};
 
 
