@@ -63,16 +63,16 @@ const EFFECTS = [
       step: 0.1
     }
   }];
-const zoomOutButton = document.querySelector('.scale__control--smaller');
-const zoomInButton = document.querySelector('.scale__control--bigger');
-const scaleInput = document.querySelector('.scale__control--value');
-const photoPreview = document.querySelector('.img-upload__preview');
+const zoomOutButtonElement = document.querySelector('.scale__control--smaller');
+const zoomInButtonElement = document.querySelector('.scale__control--bigger');
+const scaleInputElement = document.querySelector('.scale__control--value');
+const photoPreviewElement = document.querySelector('.img-upload__preview');
 const sliderContainerElement = document.querySelector('.effect-level');
 const sliderElement = document.querySelector ('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const radioButtons = document.querySelectorAll ('.effects__radio');
 
-let scaleValue = parseFloat(scaleInput.value);
+let scaleValue = parseFloat(scaleInputElement.value);
 
 
 const onZoomButtonClick = (button, minValue, maxValue, lastValue) =>
@@ -84,12 +84,12 @@ const onZoomButtonClick = (button, minValue, maxValue, lastValue) =>
     if (scaleValue >= minValue && scaleValue <= maxValue && lastValue === 100) {
       scaleValue += parseFloat(STEP);
     }
-    photoPreview.style.transform = `scale(${scaleValue / 100})`;
-    scaleInput.value = `${scaleValue}%`;
+    photoPreviewElement.style.transform = `scale(${scaleValue / 100})`;
+    scaleInputElement.value = `${scaleValue}%`;
   });
 
-onZoomButtonClick(zoomOutButton, 50, 100, 0);
-onZoomButtonClick(zoomInButton, 0, 75, 100);
+onZoomButtonClick(zoomOutButtonElement, 50, 100, 0);
+onZoomButtonClick(zoomInButtonElement, 0, 75, 100);
 
 sliderContainerElement.classList.add('hidden');
 noUiSlider.create(sliderElement, {
@@ -116,21 +116,21 @@ const onChangePhotoEffect = (evt) => {
   sliderContainerElement.classList.add('hidden');
 
   for (let i = 0; i < EFFECT_NAMES.length; i++){
-    photoPreview.classList.remove(CLASSES[i]);
+    photoPreviewElement.classList.remove(CLASSES[i]);
 
     if (evt.target.checked && evt.target.id === EFFECT_NAMES[i]) {
       sliderContainerElement.classList.remove('hidden');
-      photoPreview.classList.add(CLASSES[i]);
+      photoPreviewElement.classList.add(CLASSES[i]);
       sliderElement.noUiSlider.updateOptions(EFFECTS[i].settings);
       sliderElement.noUiSlider.set(EFFECTS[i].settings.range.max);
       sliderElement.noUiSlider.on('update', () => {
-        const filterValue= sliderElement.noUiSlider.get(true);
+        const filterValue = sliderElement.noUiSlider.get(true);
         valueElement.value = filterValue;
-        photoPreview.style.filter = `${EFFECTS[i].filter}(${filterValue}${EFFECTS[i].units})`;
+        photoPreviewElement.style.filter = `${EFFECTS[i].filter}(${filterValue}${EFFECTS[i].units})`;
       });}
     else {
-      photoPreview.classList.add('effect-none');
-      photoPreview.style.filter = '';
+      photoPreviewElement.classList.add('effect-none');
+      photoPreviewElement.style.filter = '';
     }
   }
 };
@@ -139,4 +139,4 @@ radioButtons.forEach ((button) => {
   button.addEventListener('change', (onChangePhotoEffect));
 });
 
-export {photoPreview, scaleInput, MAX_SCALE, sliderContainerElement};
+export {photoPreviewElement, scaleInputElement, MAX_SCALE, sliderContainerElement};

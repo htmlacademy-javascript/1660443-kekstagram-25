@@ -1,5 +1,5 @@
 import {onThumbnailClick} from './fullscreen.js';
-import {standardButton, popularButton, randomButton, clearPicturesList} from './filter.js';
+import {standardButtonElement, popularButtonElement, randomButtonElement, clearPicturesList} from './filter.js';
 import {uploadedPhotos} from './main.js';
 import {getRandomArrayElement, debounce} from './util.js';
 const MAX_RANDOM_PHOTOS = 10;
@@ -8,11 +8,11 @@ const RERENDERED_DELAY = 500;
 const photoFragment = document.createDocumentFragment();
 const photoContainerElement = document.querySelector ('.pictures');
 const photoTemplateFragment = document.querySelector('#picture').content;
-const photoTemplate = photoTemplateFragment.querySelector('.picture');
+const photoTemplateElement = photoTemplateFragment.querySelector('.picture');
 
 const createGalleryElement = (pictures) => {
   pictures.forEach((photo) => {
-    const photoElement =  photoTemplate.cloneNode(true);
+    const photoElement =  photoTemplateElement.cloneNode(true);
     photoElement.querySelector('.picture__likes').textContent = photo.likes;
     photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
     photoElement.querySelector('.picture__img').src = photo.url;
@@ -40,13 +40,13 @@ const createStartGallery = (pictures) => {
 const onCreateStandardGallery = () => {
   clearPicturesList();
   const standardPictures = uploadedPhotos.slice();
-  standardButton.classList.add('img-filters__button--active');
+  standardButtonElement.classList.add('img-filters__button--active');
   createGallery(standardPictures);
 };
 
 const onCreatePopularGallery = () => {
   clearPicturesList();
-  popularButton.classList.add('img-filters__button--active');
+  popularButtonElement.classList.add('img-filters__button--active');
   const copiedPictures = uploadedPhotos.slice();
   const sortedPictures = copiedPictures.sort((a , b) => b.comments.length - a.comments.length);
   createGallery(sortedPictures);
@@ -54,7 +54,7 @@ const onCreatePopularGallery = () => {
 
 const onCreateRandomGallery = () => {
   clearPicturesList();
-  randomButton.classList.add('img-filters__button--active');
+  randomButtonElement.classList.add('img-filters__button--active');
   const copiedPictures = uploadedPhotos.slice();
   let uniqueRandomPictures = [];
   const randomPictures = copiedPictures.map(()=> getRandomArrayElement(copiedPictures));
@@ -68,11 +68,11 @@ const onCreateRandomGallery = () => {
 };
 
 const addFilters = () => {
-  standardButton.addEventListener('click', debounce(onCreateStandardGallery, RERENDERED_DELAY,
+  standardButtonElement.addEventListener('click', debounce(onCreateStandardGallery, RERENDERED_DELAY,
   ));
-  popularButton.addEventListener('click', debounce(onCreatePopularGallery, RERENDERED_DELAY
+  popularButtonElement.addEventListener('click', debounce(onCreatePopularGallery, RERENDERED_DELAY
   ));
-  randomButton.addEventListener('click', debounce(onCreateRandomGallery, RERENDERED_DELAY
+  randomButtonElement.addEventListener('click', debounce(onCreateRandomGallery, RERENDERED_DELAY
   ));
 };
 
