@@ -1,19 +1,19 @@
-const pictureFilter = document.querySelector ('.img-filters');
-const popularButton = document.querySelector('#filter-discussed');
-const randomButton = document.querySelector('#filter-random');
-const standardButton = document.querySelector('#filter-default');
+const pictureFilterElement = document.querySelector ('.img-filters');
+const popularButtonElement = document.querySelector('#filter-discussed');
+const randomButtonElement = document.querySelector('#filter-random');
+const standardButtonElement = document.querySelector('#filter-default');
 const buttons = document.querySelectorAll('.img-filters__button');
-const activeButton = document.querySelector('.img-filters__button--active');
-activeButton.style.color = '#ff4e4e';
-activeButton.style.backgroundColor = '#ffffff';
+const activeButtonElement = document.querySelector('.img-filters__button--active');
+activeButtonElement.style.color = '#ff4e4e';
+activeButtonElement.style.backgroundColor = '#ffffff';
 
 window.addEventListener('load', () => {
-  pictureFilter.classList.remove('img-filters--inactive');
+  pictureFilterElement.classList.remove('img-filters--inactive');
 });
 
 const clearPicturesList = () => {
-  const picturesList = document.querySelectorAll ('.picture');
-  picturesList.forEach((unit) => {
+  const picturesListElement = document.querySelectorAll ('.picture');
+  picturesListElement.forEach((unit) => {
     unit.remove();
   });
   buttons.forEach((button) => {
@@ -23,5 +23,5 @@ const clearPicturesList = () => {
   });
 };
 
-export {popularButton, randomButton, standardButton, clearPicturesList};
+export {popularButtonElement, randomButtonElement, standardButtonElement, clearPicturesList};
 
